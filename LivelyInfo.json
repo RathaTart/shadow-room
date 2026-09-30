@@ -1,0 +1,15 @@
+{
+  "AppVersion": "2.2.0.0",
+  "Title": "Shadow Room",
+  "Thumbnail": "thumbnail.jpg",
+  "Preview": null,
+  "Desc": "A dark 3D living room. Your webcam silhouette casts a real shadow into it, objects react when your shadow touches them, and the view follows your head like a window. Runs fully offline.",
+  "Author": "RathaTart",
+  "License": "MIT (code). three.js MIT, MediaPipe Apache-2.0 (see vendor/).",
+  "Contact": "https://github.com/RathaTart/shadow-room",
+  "Type": 1,
+  "FileName": "index.html",
+  "Arguments": "--pause-event true",
+  "IsAbsolutePath": false,
+  "Tags": ["3d", "interactive", "webcam", "shadow", "room"]
+}

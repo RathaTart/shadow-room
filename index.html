@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shadow Room</title>
+  <link rel="stylesheet" href="src/style.css">
+  <script>
+    // Lively Wallpaper calls these globals, possibly before the app module has loaded.
+    // Queue the calls and replay them once the app is ready.
+    window.__livelyQueue = [];
+    window.livelyPropertyListener = function (name, val) { window.__livelyQueue.push(['prop', name, val]); };
+    window.livelyWallpaperPlaybackChanged = function (data) { window.__livelyQueue.push(['playback', data]); };
+  </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/three.module.min.js",
+        "three/addons/": "./vendor/three/addons/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="scene" aria-label="3D room with your shadow"></canvas>
+  <div id="ui"></div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

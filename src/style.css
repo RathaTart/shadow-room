@@ -1,0 +1,132 @@
+:root {
+  --ui-bg: rgba(18, 16, 14, 0.78);
+  --ui-border: rgba(255, 236, 210, 0.12);
+  --ui-text: #eae3d8;
+  --ui-muted: #a79d90;
+  --ui-accent: #ffb86b;
+  color-scheme: dark;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #020203;
+  color: var(--ui-text);
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+/* ---------------------------------------------------------------- overlay UI */
+#ui { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
+#ui > * { pointer-events: auto; }
+#ui.hidden .hud, #ui.hidden .preview { display: none; }
+
+.hud {
+  position: absolute; left: 16px; bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px 6px 12px; border-radius: 999px;
+  background: var(--ui-bg); border: 1px solid var(--ui-border);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+#ui.active .hud { opacity: 1; transform: none; }
+.hud .dot { width: 8px; height: 8px; border-radius: 50%; background: #7bd88f; box-shadow: 0 0 8px currentColor; color: #7bd88f; }
+.hud .dot[data-kind="demo"] { background: var(--ui-accent); color: var(--ui-accent); }
+.hud .dot[data-kind="warn"] { background: #ff7a6b; color: #ff7a6b; }
+.hud .dot[data-kind="away"] { background: #8a8f99; color: #8a8f99; box-shadow: none; }
+.hud .status { color: var(--ui-text); white-space: nowrap; }
+.hud button, .panel button {
+  font: inherit; color: var(--ui-text); background: rgba(255,255,255,.06);
+  border: 1px solid var(--ui-border); border-radius: 999px; cursor: pointer;
+}
+.hud .gear { width: 28px; height: 28px; padding: 0; font-size: 15px; line-height: 1; }
+.hud .center { height: 28px; padding: 0 11px; }
+
+/* Target to look at while centering (also shown in Lively, where the HUD is hidden). */
+#ui .aim {
+  position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px;
+  border: 2px solid var(--ui-accent); border-radius: 50%; box-shadow: 0 0 18px rgba(255, 184, 107, 0.45);
+  pointer-events: none; opacity: 0; transition: opacity .2s ease;
+}
+#ui .aim::after {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px;
+  border-radius: 50%; background: var(--ui-accent);
+}
+#ui .aim.show { opacity: 1; animation: aim-pulse 1s ease-in-out infinite; }
+@keyframes aim-pulse { 50% { transform: scale(1.18); } }
+.hud button:hover, .panel button:hover { background: rgba(255,255,255,.12); }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
+
+.preview {
+  position: absolute; left: 16px; bottom: 60px; width: 160px; height: 130px;
+  border-radius: 10px; border: 1px solid var(--ui-border); background: #000; display: none;
+}
+
+/* Tracking view (V). Opaque rather than blurred: a diagnostics overlay should not cost frames itself. */
+#ui .tracking {
+  position: absolute; top: 16px; right: 16px; width: 256px;
+  display: none; flex-direction: column; gap: 6px; padding: 8px;
+  background: rgba(14, 12, 11, 0.9); border: 1px solid var(--ui-border); border-radius: 12px;
+  font: 11px/1.35 ui-monospace, "Cascadia Mono", Consolas, monospace;
+  pointer-events: none;
+  transition: right .35s ease;
+}
+#ui .tracking.show { display: flex; }
+#ui.panel-open .tracking { right: calc(min(320px, 100vw - 32px) + 32px); }
+.tracking canvas { display: block; border-radius: 6px; }
+.tracking .row { display: flex; gap: 8px; align-items: flex-start; }
+.tracking .stats { flex: 1; min-width: 0; }
+.tracking .stats > div, .tracking .foot { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tracking .k { display: inline-block; width: 7ch; color: var(--ui-muted); }
+.tracking .ok { color: #7bd88f; }
+.tracking .warn { color: var(--ui-accent); }
+.tracking .bad { color: #ff7a6b; }
+.tracking .hint { min-height: 1.35em; }
+.tracking .foot { color: var(--ui-muted); }
+
+.toast {
+  position: absolute; top: 18px; left: 50%; transform: translate(-50%, -10px);
+  max-width: min(560px, calc(100vw - 32px));
+  padding: 8px 14px; border-radius: 10px; text-align: center;
+  background: var(--ui-bg); border: 1px solid var(--ui-border);
+  opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.panel {
+  position: absolute; top: 16px; right: 16px; bottom: 16px; width: min(320px, calc(100vw - 32px));
+  display: flex; flex-direction: column;
+  background: var(--ui-bg); border: 1px solid var(--ui-border); border-radius: 14px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  transform: translateX(calc(100% + 24px)); transition: transform .35s ease;
+}
+.panel.open { transform: none; }
+.panel header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 6px; }
+.panel header strong { font-weight: 600; letter-spacing: .02em; }
+.panel .close { width: 28px; height: 28px; padding: 0; }
+.panel .rows { overflow-y: auto; padding: 0 14px 8px; flex: 1; }
+.panel h3 { margin: 14px 0 6px; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ui-muted); }
+.panel .row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 10px; padding: 5px 0; cursor: pointer; }
+.panel .row.range { grid-template-columns: 1fr 42px; }
+.panel .row.range input { grid-column: 1 / -1; grid-row: 2; width: 100%; accent-color: var(--ui-accent); }
+.panel .row output { color: var(--ui-muted); font-variant-numeric: tabular-nums; text-align: right; font-size: 12px; }
+.panel .row.check output, .panel .row.select output { display: none; }
+.panel .row input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--ui-accent); }
+.panel select { font: inherit; color: var(--ui-text); background: #1d1a17; border: 1px solid var(--ui-border); border-radius: 6px; padding: 2px 6px; }
+.panel footer { display: flex; gap: 8px; padding: 8px 14px; border-top: 1px solid var(--ui-border); }
+.panel footer button { padding: 6px 12px; }
+.panel .hint { margin: 0; padding: 0 14px 12px; color: var(--ui-muted); font-size: 11.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hud, .toast, .panel, #ui .tracking { transition: none; }
+  #ui .aim.show { animation: none; }
+}
