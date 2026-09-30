@@ -12,14 +12,14 @@
 
 | Feature | You… | The room… |
 | --- | --- | --- |
-| [**Your shadow**](#your-shadow-for-real) | sit in front of the webcam | gets your silhouette as a real, soft-edged shadow, cast by a light behind you |
-| [**Shadow touch**](#touch-things-with-your-shadow) | let your shadow touch things | reacts: the lamp swings, pillows hop, paintings tilt, curtains ripple |
-| [**Lights & TV**](#lights-and-tv) | hold your head's shadow on the TV or the light switch | turns the TV on, or the ceiling lamp off |
-| [**The cat**](#the-cat) | raise a hand | wakes a cat that chases your hand's shadow like a laser dot |
-| [**Look around**](#look-all-around) | turn your head a little | turns a lot: 10° looks to the side, 15° looks behind you |
-| [**Window effect**](#a-window-not-a-picture) | move your head | shifts its perspective like a real window |
+| [**Your&nbsp;shadow**](#your-shadow-for-real) | sit in front of the webcam | gets your silhouette as a real, soft-edged shadow, cast by a light behind you |
+| [**Shadow&nbsp;touch**](#touch-things-with-your-shadow) | let your shadow touch things | reacts: the lamp swings, pillows hop, paintings tilt, curtains ripple |
+| [**Lights&nbsp;&&nbsp;TV**](#lights-and-tv) | hold your head's shadow on the TV or the light switch | turns the TV on, or the ceiling lamp off |
+| [**The&nbsp;cat**](#the-cat) | raise a hand | wakes a cat that chases your hand's shadow like a laser dot |
+| [**Look&nbsp;around**](#look-all-around) | turn your head a little | turns a lot: 10° looks to the side, 15° looks behind you |
+| [**Window&nbsp;effect**](#a-window-not-a-picture) | move your head | shifts its perspective like a real window |
 | [**Center**](#center-your-normal-head-position) | press **⌖ Center** | takes your normal sitting pose as straight ahead |
-| [**Tracking view**](#tracking-view) | press **V** | shows what the webcam and the tracker see, stage by stage |
+| [**Tracking&nbsp;view**](#tracking-view) | press **V** | shows what the webcam and the tracker see, stage by stage |
 
 Everything runs on your computer. three.js, MediaPipe and the pose model are bundled, so webcam frames never leave the page. No webcam, or you'd rather not? A demo figure plays your part, and the mouse can steer it ([open the demo](https://rathatart.github.io/shadow-room/?demo=1)).
 
@@ -37,7 +37,7 @@ A light stands in the hallway behind you, and your silhouette stands in the door
 - Lean toward the screen and it shrinks and sharpens; lean back and it grows.
 - Raise a hand to swat the ceiling lamp. While the lamp swings, every shadow in the room swings with it.
 
-<sub>Demo figure, real-time speed.</sub>
+*Demo figure, real-time speed.*
 
 ### Touch things with your shadow
 
@@ -58,7 +58,7 @@ Each object tests a few points against your shadow, and reacts when your shadow 
 
 You can also **click** objects; Lively forwards desktop clicks to the wallpaper.
 
-<sub>Demo figure, 2× speed.</sub>
+*Demo figure, 2× speed.*
 
 ### Lights and TV
 
@@ -66,7 +66,7 @@ You can also **click** objects; Lively forwards desktop clicks to the wallpaper.
 
 Hold your head's shadow on the TV for about half a second and it switches on, filling the room with its changing light. Do the same on the light switch beside it, and the ceiling lamp goes out. **T** and **L** do the same from the keyboard.
 
-<sub>Demo figure, 2× speed.</sub>
+*Demo figure, 2× speed.*
 
 ### The cat
 
@@ -87,7 +87,7 @@ A ginger tabby lives in the room. Hold a hand out and the shadow of your hand be
 
 The *cat* row of the tracking view says what it is doing. Turn it off with the *Cat* setting.
 
-<sub>Demo figure holding its arm out: the dot is the shadow of its hand. Real-time speed, cropped.</sub>
+*Demo figure holding its arm out: the dot is the shadow of its hand. Real-time speed, cropped.*
 
 ### Look all around
 
@@ -104,7 +104,7 @@ You still have to watch the monitor, so a small turn does a lot:
 
 Turn off *Look all around* for a gentle ±40° left/right-only version, or set *Head turn sensitivity* to 0.
 
-<sub>Simulated head poses: turns of 10°, 16.5°, back to 0°, −8°, then an 8° nod up. Real-time speed.</sub>
+*Simulated head poses: turns of 10°, 16.5°, back to 0°, −8°, then an 8° nod up. Real-time speed.*
 
 ### A window, not a picture
 
@@ -112,7 +112,7 @@ Turn off *Look all around* for a gentle ±40° left/right-only version, or set *
 
 The camera uses an off-axis projection that follows your eyes. Move sideways and you look around the sofa; lean in and the room opens up at the edges, like a real window. Your distance comes from how far apart your eyes appear (about 63 mm in reality), cross-checked with your shoulder width. No depth camera is needed.
 
-<sub>Simulated head moving 13 cm left and right, then leaning in from 60 to 45 cm. Head turn is off for this clip.</sub>
+*Simulated head moving 13 cm left and right, then leaning in from 60 to 45 cm. Head turn is off for this clip.*
 
 ### Center: your normal head position
 
@@ -125,7 +125,7 @@ Straight ahead is your normal sitting pose, not whatever pose you had when the w
 
 The pose is saved and used from then on.
 
-<sub>Real-time recording of a simulated person whose normal pose is turned 7°, so the room faces the side wall until centering.</sub>
+*Real-time recording of a simulated person whose normal pose is turned 7°, so the room faces the side wall until centering.*
 
 ### Tracking view
 
@@ -158,7 +158,7 @@ It's on by default in the browser. In Lively it starts off, so your webcam pictu
 
 </details>
 
-<sub>Real-time recording. The person, the mask and the track numbers are simulated. The render and camera rows are the page's own live measurements, with Chrome's test camera.</sub>
+*Real-time recording. The person, the mask and the track numbers are simulated. The render and camera rows are the page's own live measurements, with Chrome's test camera.*
 
 ## Run it
 
